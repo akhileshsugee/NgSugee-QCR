@@ -1,0 +1,16 @@
+#header {
+    width: calc(100% - 20px);
+    height: auto;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#getEntriesButton {
+    background-color: #0e8961;
+    color: white !important;
+    border: none;
+    width: 212px;
+    height: 55px;
+}

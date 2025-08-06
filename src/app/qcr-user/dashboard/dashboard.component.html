@@ -1,0 +1,58 @@
+<div id="wrapper">
+    <div id="header">
+        <mat-form-field>
+            <mat-label>Bank</mat-label>
+            <mat-select (selectionChange)="getBranches()" [(ngModel)]="selectedBank" name="bank">
+                <mat-option *ngFor="let bank of BankList" [value]="bank.bank_code">
+                    {{ bank.bank_name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        &nbsp;&nbsp;
+
+        <mat-form-field>
+            <mat-label>Branch</mat-label>
+            <mat-select [(ngModel)]="selectedBranch" name="branch">
+                <mat-option *ngFor="let branch of BranchList" [value]="branch.branch_code">
+                    {{ branch.branch_name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        &nbsp;&nbsp;
+
+        <button mat-raised-button color="primary" (click)="getEntries()" [disabled]="!selectedBank || !selectedBranch"
+            id="getEntriesButton">
+            Get Entries
+        </button>
+    </div>
+
+    <!-- <mat-toolbar>
+        <span>Dashboard</span>
+        <span class="spacer"></span>
+        <button mat-icon-button (click)="sidebar.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <div class="user_details_with_login_icon" (click)="openProfileDialog()">
+            <div class="user_icon">
+                <img src="../../../assets/img/user.png" alt="Profile">
+            </div>
+            <div class="user_info">
+                <div class="user_name">{{userName}}</div>
+            </div>
+        </div>
+        <form class="example-form">
+            <mat-form-field class="example-full-width">
+                <mat-label>Number</mat-label>
+                <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
+                    [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </form>
+
+    </mat-toolbar> -->
+
+</div>
