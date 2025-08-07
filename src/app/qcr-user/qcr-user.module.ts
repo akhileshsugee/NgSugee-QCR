@@ -22,10 +22,7 @@ import { PendingUserComponent } from './pending-user/pending-user.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-import {NgFor, AsyncPipe} from '@angular/common';
-
+import { MatExpansionModule } from '@angular/material/expansion';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -49,7 +46,8 @@ import {NgFor, AsyncPipe} from '@angular/common';
     MatSelectModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatExpansionModule
 
 
   ]

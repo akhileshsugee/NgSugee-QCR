@@ -58,15 +58,146 @@
 
             </div>
             <div class="kycDetailsContent">
-                <div class="imageArea"></div>
-                <div class="contentArea"></div>
+                <div class="imageArea">
+
+                </div>
+                <mat-accordion class="contentArea" [multi]="false">
+                    <!-- Aadhaar Details Panel -->
+                    <mat-expansion-panel [expanded]="true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>Aadhaar Details</mat-panel-title>
+                        </mat-expansion-panel-header>
+
+                        <div class="form-section">
+                            <mat-form-field appearance="fill" class="small-field">
+                                <mat-label>Aadhaar Number</mat-label>
+                                <input matInput />
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill" class="small-field">
+                                <mat-label>Name</mat-label>
+                                <input matInput />
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill" class="small-field">
+                                <mat-label>Relation</mat-label>
+                                <mat-select>
+                                    <mat-option value="FATHER">FATHER</mat-option>
+                                    <mat-option value="MOTHER">MOTHER</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill" class="small-field">
+                                <mat-label>Relation Name</mat-label>
+                                <input matInput placeholder="Enter relation's name" />
+                            </mat-form-field>
+
+                            <div class="gender-dob">
+                                <mat-form-field appearance="fill" class="gender">
+                                    <mat-label>Gender</mat-label>
+                                    <mat-select>
+                                        <mat-option value="MALE">MALE</mat-option>
+                                        <mat-option value="FEMALE">FEMALE</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <div class="dob">
+                                    <mat-label>Date of Birth</mat-label>
+                                    <div class="dob-selects">
+                                        &nbsp;&nbsp;
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Year</mat-label>
+                                            <mat-select>
+                                                <mat-option *ngFor="let y of years" [value]="y">{{ y }}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Month</mat-label>
+                                            <mat-select>
+                                                <mat-option *ngFor="let m of months" [value]="m.value">{{ m.name
+                                                    }}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Day</mat-label>
+                                            <mat-select>
+                                                <mat-option *ngFor="let d of days" [value]="d">{{ d }}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <mat-form-field appearance="fill" class="full-field">
+                                <mat-label>Address</mat-label>
+                                <textarea matInput rows="3"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </mat-expansion-panel>
+
+                    <!-- PAN Details Panel -->
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>Pan Details</mat-panel-title>
+                        </mat-expansion-panel-header>
+
+                        <div class="form-section">
+                            <mat-form-field appearance="fill" class="small-field">
+                                <mat-label>Pan Number</mat-label>
+                                <input matInput />
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill" class="small-field">
+                                <mat-label>Name on Pan</mat-label>
+                                <input matInput />
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill" class="small-field">
+                                <mat-label>Father Name on Pan</mat-label>
+                                <input matInput />
+                            </mat-form-field>
+
+                            <div class="dob">
+                                <mat-label>DOB</mat-label>
+                                <div class="dob-selects">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Year</mat-label>
+                                        <mat-select>
+                                            <mat-option *ngFor="let y of years" [value]="y">{{ y }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Month</mat-label>
+                                        <mat-select>
+                                            <mat-option *ngFor="let m of months" [value]="m.value">{{ m.name
+                                                }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Day</mat-label>
+                                        <mat-select>
+                                            <mat-option *ngFor="let d of days" [value]="d">{{ d }}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+
+
+
             </div>
         </div>
 
         <div id="Norecord" width="100%"
             style="display: flex; justify-content: center; text-align: center; align-items: center;"
             *ngIf="BranchCustomerList && BranchCustomerList.length > 0">
-            <!-- <p *ngIf="BranchCustomerList && BranchCustomerList.length === 0">No records found.</p> -->
+            <p *ngIf="BranchCustomerList && BranchCustomerList.length === 0">No records found.</p>
         </div>
 
 
