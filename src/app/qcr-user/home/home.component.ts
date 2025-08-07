@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { AuthService } from 'src/app/services/auth.services';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private router: Router,
-    private observer: BreakpointObserver
+    private observer: BreakpointObserver ,
+    private authService : AuthService
 
   ) { }
   ngOnInit(): void {
@@ -44,9 +46,7 @@ export class HomeComponent implements OnInit {
 
     }
   }
-
   logout() {
-    console.log('Logging out...');
-    // your logout logic
+    this.authService.logout()
   }
 }

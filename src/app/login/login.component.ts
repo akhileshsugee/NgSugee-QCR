@@ -1,18 +1,30 @@
+// signin.component.ts
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../services/auth.services';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'] // optional, or use Tailwind in template
 })
 export class LoginComponent {
+  loginForm: FormGroup;
 
-  constructor(private router: Router) { }
-  onLogin() {
-    // Logic for handling login
-    console.log('Login button clicked');
-    this.router.navigate(['kyc']); // Navigate to the home route after login
+  constructor(private fb: FormBuilder, private authService: AuthService) {
+    this.loginForm = this.fb.group({
+      phone_no: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      password: ['', Validators.required]
+    });
+  }
 
+  onSubmit() {
+    if (this.loginForm.valid) {
+      const { phone_no, password } = this.loginForm.value;
+      this.authService.login({
+        email: phone_no,
+        password
+      });
+    }
   }
 }
