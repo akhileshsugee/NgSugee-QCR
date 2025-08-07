@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Bank, Banks, Branch, Branchs } from 'src/app/interfaces/kycdata.interface';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Bank, Banks, Branch, BranchCustomer, BranchCustomers, Branchs } from 'src/app/interfaces/kycdata.interface';
 import { KycApiService } from 'src/app/services/kyc-api.service';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,8 +13,13 @@ import { KycApiService } from 'src/app/services/kyc-api.service';
 export class DashboardComponent implements OnInit {
   BankList: Bank[] = [];
   BranchList: Branch[] = [];
+  BranchCustomerList: BranchCustomer[] = [];
   selectedBank: string = '';
   selectedBranch: string = '';
+
+
+  myControl = new FormControl('');
+  filteredOptions!: Observable<BranchCustomer[]>;
 
   constructor(private kycApiService: KycApiService) { }
 
@@ -23,6 +31,11 @@ export class DashboardComponent implements OnInit {
       error => {
         console.error('Error loading banks:', error);
       }
+    );
+
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || ''))
     );
   }
 
@@ -50,11 +63,33 @@ export class DashboardComponent implements OnInit {
       console.warn('No branch code selected');
       return;
     }
+    this.GetBranchCustomer();
+  }
 
-    // Logic to get entries based on selected branch can be added here
-    console.log(`Fetching entries for branch: ${this.selectedBranch}`);
+  GetBranchCustomer() {
+    const formData = new FormData();
+    formData.append('bank_code', this.selectedBank);
+    formData.append('branch_code', this.selectedBranch);
+
+    this.kycApiService.getBranchCustomer(formData).subscribe(
+      (response: { data: BranchCustomer[] }) => {
+        this.BranchCustomerList = response.data;
+        console.log('Branch Customer Data:', this.BranchCustomerList);
+      }
+    );
   }
 
 
-  
+  private _filter(value: string): BranchCustomer[] {
+    const filterValue = value.toLowerCase();
+
+    return this.BranchCustomerList.filter(option =>
+      option.account_number.toLowerCase().includes(filterValue) ||
+      option.cif_number.toLowerCase().includes(filterValue)
+    );
+  }
+
+
+
+
 }

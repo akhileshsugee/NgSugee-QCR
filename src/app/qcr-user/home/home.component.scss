@@ -4,7 +4,9 @@
 }
 
 .main {
-  overflow: auto;
+  width: calc(100% - 10px);
+  height: calc(100vh - 64px);
+  overflow-x: scroll;
 }
 
 /* Toolbar */
@@ -111,7 +113,8 @@ mat-sidenav {
   background-color: #0e8961;
   color: white;
   font-weight: bold;
-  box-shadow: inset 4px 0 0 #064631; /* left highlight bar */
+  box-shadow: inset 4px 0 0 #064631;
+  /* left highlight bar */
 }
 
 .sidebar_menu_area .btn.active mat-icon {

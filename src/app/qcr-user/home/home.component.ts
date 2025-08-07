@@ -1,18 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
+import { BreakpointObserver } from '@angular/cdk/layout';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+  @ViewChild('sidebar') sidebar!: MatSidenav;
+
+  sidenavMode: 'side' | 'over' = 'side';
+  isSmallScreen = false;
+  isSidebarOpened = true;
+  userName = 'Admin';
   constructor(
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private observer: BreakpointObserver
 
   ) { }
-  userName: string = 'Mr. ABC'; // Placeholder for user name
+  ngOnInit(): void {
+    this.observer.observe(['(max-width: 920px)']).subscribe(result => {
+      this.isSmallScreen = result.matches;
+      this.sidenavMode = this.isSmallScreen ? 'over' : 'side';
+      this.isSidebarOpened = !this.isSmallScreen;
+    });
+  }
   openProfileDialog() {
     // Example: Uncomment when ProfiledialogComponent is ready
     // this.dialog.open(ProfiledialogComponent, { disableClose: true });

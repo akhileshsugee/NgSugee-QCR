@@ -26,33 +26,49 @@
         </button>
     </div>
 
-    <!-- <mat-toolbar>
-        <span>Dashboard</span>
-        <span class="spacer"></span>
-        <button mat-icon-button (click)="sidebar.toggle()">
-            <mat-icon>menu</mat-icon>
-        </button>
-        <div class="user_details_with_login_icon" (click)="openProfileDialog()">
-            <div class="user_icon">
-                <img src="../../../assets/img/user.png" alt="Profile">
-            </div>
-            <div class="user_info">
-                <div class="user_name">{{userName}}</div>
-            </div>
-        </div>
-        <form class="example-form">
-            <mat-form-field class="example-full-width">
-                <mat-label>Number</mat-label>
-                <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
-                    [matAutocomplete]="auto">
-                <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                        {{option}}
-                    </mat-option>
+    <div id="content" *ngIf="BranchCustomerList && BranchCustomerList.length == 0">
+        <form class="example-form w-full" width="100%">
+            <mat-form-field appearance="outline" class="example-full-width w-full" style="width: 100%;">
+                <mat-label>Search by account number or CIF number...</mat-label>
+                <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption>
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option.account_number">
+                        {{ option.name }} &nbsp;( {{ option.account_number }} )</mat-option>
                 </mat-autocomplete>
             </mat-form-field>
         </form>
 
-    </mat-toolbar> -->
+        <div id="kycDeatils">
+            <div class="kycDetailsHeader">
+                <span class="kycDetailsHeader-title"> &nbsp;&nbsp; KYC Details</span>
+                <form class="example-form">
+                    <mat-form-field class="example-full-width">
+                        <mat-label> Account Number : </mat-label>
+                        <input matInput placeholder="Account Number" value="193719">
+                    </mat-form-field>
 
-</div>
+                    &nbsp;&nbsp;
+                    <mat-form-field class="example-full-width">
+                        <mat-label>CIF Number : </mat-label>
+                        <input matInput placeholder="CIF Number " value="1868173928389">
+                    </mat-form-field>
+
+
+                </form>
+
+            </div>
+            <div class="kycDetailsContent">
+                <div class="imageArea"></div>
+                <div class="contentArea"></div>
+            </div>
+        </div>
+
+        <div id="Norecord" width="100%"
+            style="display: flex; justify-content: center; text-align: center; align-items: center;"
+            *ngIf="BranchCustomerList && BranchCustomerList.length > 0">
+            <!-- <p *ngIf="BranchCustomerList && BranchCustomerList.length === 0">No records found.</p> -->
+        </div>
+
+
+
+    </div>

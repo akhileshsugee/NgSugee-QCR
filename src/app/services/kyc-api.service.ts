@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Banks, Branchs } from '../interfaces/kycdata.interface';
+import { Banks, BranchCustomers, Branchs } from '../interfaces/kycdata.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -20,5 +20,9 @@ export class KycApiService {
 
   getBranches(data: any): Observable<Branchs> {
     return this.http.post<Branchs>(this.BaseUrl + 'getBranches', data);
+  }
+
+  getBranchCustomer(data: any): Observable<BranchCustomers> {
+    return this.http.post<BranchCustomers>(this.BaseUrl + 'getBranchCustomers', data);
   }
 }

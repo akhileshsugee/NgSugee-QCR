@@ -26,3 +26,20 @@ export interface Branchs {
     message: string;
     data: Branch[];
 }
+
+
+export interface BranchCustomer {
+    gid: string;
+    bank_code: string;
+    branch_code: string;
+    account_number: string;
+    cif_number: string;
+    id_number: string;
+    name: string;
+}
+
+export interface BranchCustomers {
+    status: string;
+    message: string;
+    data: BranchCustomer[];
+}

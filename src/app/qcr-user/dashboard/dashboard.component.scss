@@ -1,16 +1,98 @@
-#header {
+#wrapper {
     width: calc(100% - 20px);
-    height: auto;
+    height: calc(100vh - 64px);
     padding: 10px;
+}
+
+#header {
+    width: calc(100%);
+    height: auto;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+
+    #getEntriesButton {
+        background-color: #0e8961;
+        color: white !important;
+        border: none;
+        width: 212px;
+        height: 55px;
+    }
 }
 
-#getEntriesButton {
-    background-color: #0e8961;
-    color: white !important;
-    border: none;
-    width: 212px;
-    height: 55px;
+
+#content {
+    width: 100%;
+    margin-top: 20px;
+    height: 500px;
+
+    #kycDeatils {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .kycDetailsHeader {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            ;
+
+            .kycDetailsHeader-title {
+                font-size: 20px;
+                font-weight: bold;
+                color: #000;
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+    .kycDetailsContent {
+        width: 100%;
+        height: 100%;
+
+        .imageArea {
+            width: 350px;
+            height: 250px;
+            display: flex;
+            float: left;
+            justify-content: center;
+            background-color: lightcoral;
+        }
+
+        .contentArea {
+            width: calc(100% - 350px);
+            float: right;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: red;
+        }
+    }
+}
+
+
+
+@media (max-width: 920px) {
+    .kycDetailsHeader {
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        .example-form {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center !important;
+        }
+    }
+
+    .example-full-width {
+        width: 212px;
+    }
+
 }
