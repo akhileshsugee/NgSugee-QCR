@@ -78,67 +78,20 @@
             justify-content: center;
             flex-wrap: wrap;
         }
+    }
 
-        .small-field {
-            width: 50%;
-            padding: 8px;
-            box-sizing: border-box;
+    #buttonFooter {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+
+        button {
+            margin: 0 10px;
+            float: right;
         }
 
-        .full-field {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-        }
-
-        .gender-dob {
-
-            width: 100%;
-
-            .gender {
-                width: 50% !important;
-            }
-
-            .dob {
-                width: calc(100% - 110px) !important;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-
-                .dob-selects {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 100%;
-                    padding: 10px;
-                    box-sizing: border-box;
-
-                    mat-form-field {
-                        width: 100px;
-                        height: 63px !important;
-                        margin-right: 5px;
-                        position: relative;
-                        top: -15px;
-
-                        &:last-child {
-                            margin-right: 0;
-                        }
-                    }
-                }
-            }
-
-
-
-        }
-
-        .gender {
-            flex: 1;
-            float: left;
-        }
-
-        .dob {
-            flex: 2;
-        }
 
     }
 }
@@ -166,5 +119,66 @@
     .example-full-width {
         width: 212px;
     }
+
+
+    .kycDetailsContent {
+        width: 100vw !important;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .imageArea {
+            width: 350px;
+            height: 250px;
+        }
+
+        .contentArea {
+            width: 100vw;
+            clear: both;
+            display: flex;
+            justify-content: center;
+
+        }
+
+        #kycAccordion {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #panCollapse {
+            width: calc(100vw - 40px);
+            padding: 20px;
+        }
+
+        #aadhaarCollapse {
+            width: calc(100vw - 40px);
+            padding: 20px;
+        }
+
+        #aadhaarHeading {
+            width: 100vw
+        }
+
+        #panHeading {
+            width: 100vw
+        }
+
+
+    }
+
+    #buttonFooter {
+        width: 100vw !important;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
 
 }

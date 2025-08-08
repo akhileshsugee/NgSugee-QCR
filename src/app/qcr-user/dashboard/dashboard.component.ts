@@ -105,6 +105,14 @@ export class DashboardComponent implements OnInit {
     { value: '11', name: 'November' },
     { value: '12', name: 'December' },
   ];
+
   days = Array.from({ length: 31 }, (_, i) => i + 1);
 
+
+  approveKYCDetails() {
+  }
+  rejectKYCDetails() {
+  }
+
+  holdKYCDetails() { }
 }
