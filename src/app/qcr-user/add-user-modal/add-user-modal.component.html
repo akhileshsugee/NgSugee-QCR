@@ -1,0 +1,34 @@
+<div class="overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Add a new user</h2>
+      <div class="close-btn" (click)="close.emit()">
+        ✕
+      </div>
+    </div>
+
+    <div *ngIf="loading" class="loader">
+      <!-- Replace with custom loader if needed -->
+      <p>Loading...</p>
+    </div>
+
+    <form *ngIf="!loading" [formGroup]="addUserForm" (ngSubmit)="onSubmit()" class="form">
+      <div class="form-group">
+        <label>Name:</label>
+        <input type="text" formControlName="name" placeholder="Enter user's name..." />
+      </div>
+
+      <div class="form-group">
+        <label>Email:</label>
+        <input type="email" formControlName="email" placeholder="Enter user's email..." />
+      </div>
+
+      <div class="form-group">
+        <label>Mobile Number:</label>
+        <input type="text" formControlName="mobile" placeholder="Enter user's mobile number..." />
+      </div>
+
+      <button type="submit" [disabled]="addUserForm.invalid">Add User</button>
+    </form>
+  </div>
+</div>

@@ -23,11 +23,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { MatExpansionModule } from '@angular/material/expansion';
+import { UserManagementComponent } from './userMangement/userManagement.component';
+import { AddUserModalComponent } from './add-user-modal/add-user-modal.component';
 @NgModule({
   declarations: [
     HomeComponent,
     DashboardComponent,
-    PendingUserComponent
+    PendingUserComponent,
+    UserManagementComponent , 
+    AddUserModalComponent
   ],
   imports: [
     CommonModule,

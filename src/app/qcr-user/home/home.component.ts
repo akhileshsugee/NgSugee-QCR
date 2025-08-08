@@ -22,8 +22,8 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private observer: BreakpointObserver ,
     private authService : AuthService
-
   ) { }
+  isAdmin = this.authService.isAdmin$
   ngOnInit(): void {
     this.observer.observe(['(max-width: 920px)']).subscribe(result => {
       this.isSmallScreen = result.matches;
@@ -40,10 +40,10 @@ export class HomeComponent implements OnInit {
     console.log(route);
     if (route === 'dashboard') {
       this.router.navigate(['kyc/dashboard']);
-    } if (route === 'pending') {
+    } else if (route === 'pending') {
       this.router.navigate(['kyc/pending']);
-    } else {
-
+    } else if(route === 'userManagement') {
+      this.router.navigate(['kyc/userManagement'])
     }
   }
   logout() {

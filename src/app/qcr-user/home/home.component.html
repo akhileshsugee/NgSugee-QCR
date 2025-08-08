@@ -5,14 +5,19 @@
     </div>
 
     <div class="sidebar_menu_area">
-      <button class="btn" routerLink="/kyc/dashboard" routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }">
+      <button *ngIf="!isAdmin" class="btn" routerLink="/kyc/dashboard" routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }">
         <mat-icon>dashboard</mat-icon>
         Dashboard
       </button>
+      <button *ngIf="isAdmin" class="btn" routerLink="/kyc/userManagement" routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>dashboard</mat-icon>
+        User Management
+      </button>
 
       <button class="btn" routerLink="/kyc/pending" routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }">
+        [routerLinkActiveOptions]="{ exact: true }">
         <mat-icon>pending</mat-icon>
         Pending
       </button>
