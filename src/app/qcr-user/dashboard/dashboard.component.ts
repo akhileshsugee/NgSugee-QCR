@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Bank, Banks, Branch, BranchCustomer, BranchCustomers, Branchs } from 'src/app/interfaces/kycdata.interface';
+import { Bank, Banks, Branch, BranchCustomer, BranchCustomers, Branchs, KYCEntries } from 'src/app/interfaces/kycdata.interface';
 import { KycApiService } from 'src/app/services/kyc-api.service';
 import { map, startWith } from 'rxjs/operators';
 
@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   BranchCustomerList: BranchCustomer[] = [];
   selectedBank: string = '';
   selectedBranch: string = '';
+  ocrData!: KYCEntries
 
 
   myControl = new FormControl('');
@@ -56,6 +57,29 @@ export class DashboardComponent implements OnInit {
         console.error('Error loading branches:', error);
       }
     );
+  }
+
+  getOcrData() {
+    if (this.selectedBank.length == 0 || this.selectedBranch.length == 0) {
+      alert('Either Bank or branch is missing')
+      return
+    }
+    try {
+      const formData = new FormData()
+      formData.append("bank_code", this.selectedBank)
+      formData.append("branch_code", this.selectedBranch)
+      this.kycApiService.getOcrData(formData).subscribe(
+        (response: KYCEntries) => {
+          this.ocrData = response
+        }, 
+        err => {
+          console.log('OCR DATA : ' , err)
+        }
+      )
+    } catch (error) {
+      console.log('Catch block error : ' , error)
+    }
+
   }
 
   getEntries() {
