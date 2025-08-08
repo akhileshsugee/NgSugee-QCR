@@ -26,7 +26,7 @@
         </button>
     </div>
 
-    <div id="content" *ngIf="BranchCustomerList && BranchCustomerList.length == 0">
+    <div id="content" *ngIf="BranchCustomerList && BranchCustomerList.length > 0">
         <form class="example-form w-full" width="100%">
             <mat-form-field appearance="outline" class="example-full-width w-full" style="width: 100%;">
                 <mat-label>Search by account number or CIF number...</mat-label>
@@ -61,133 +61,153 @@
                 <div class="imageArea">
 
                 </div>
-                <mat-accordion class="contentArea" [multi]="false">
-                    <!-- Aadhaar Details Panel -->
-                    <mat-expansion-panel [expanded]="true">
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>Aadhaar Details</mat-panel-title>
-                        </mat-expansion-panel-header>
 
-                        <div class="form-section">
-                            <mat-form-field appearance="fill" class="small-field">
-                                <mat-label>Aadhaar Number</mat-label>
-                                <input matInput />
-                            </mat-form-field>
 
-                            <mat-form-field appearance="fill" class="small-field">
-                                <mat-label>Name</mat-label>
-                                <input matInput />
-                            </mat-form-field>
+                <div class="accordion contentArea" id="kycAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="aadhaarHeading">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#aadhaarCollapse" aria-expanded="true" aria-controls="aadhaarCollapse">
+                                Aadhaar Details
+                            </button>
+                        </h2>
+                        <div id="aadhaarCollapse" class="accordion-collapse collapse show"
+                            aria-labelledby="aadhaarHeading" data-bs-parent="#kycAccordion">
+                            <div class="accordion-body">
+                                <form class="row g-3">
 
-                            <mat-form-field appearance="fill" class="small-field">
-                                <mat-label>Relation</mat-label>
-                                <mat-select>
-                                    <mat-option value="FATHER">FATHER</mat-option>
-                                    <mat-option value="MOTHER">MOTHER</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-                            <mat-form-field appearance="fill" class="small-field">
-                                <mat-label>Relation Name</mat-label>
-                                <input matInput placeholder="Enter relation's name" />
-                            </mat-form-field>
-
-                            <div class="gender-dob">
-                                <mat-form-field appearance="fill" class="gender">
-                                    <mat-label>Gender</mat-label>
-                                    <mat-select>
-                                        <mat-option value="MALE">MALE</mat-option>
-                                        <mat-option value="FEMALE">FEMALE</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-
-                                <div class="dob">
-                                    <mat-label>Date of Birth</mat-label>
-                                    <div class="dob-selects">
-                                        &nbsp;&nbsp;
-                                        <mat-form-field appearance="fill">
-                                            <mat-label>Year</mat-label>
-                                            <mat-select>
-                                                <mat-option *ngFor="let y of years" [value]="y">{{ y }}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-
-                                        <mat-form-field appearance="fill">
-                                            <mat-label>Month</mat-label>
-                                            <mat-select>
-                                                <mat-option *ngFor="let m of months" [value]="m.value">{{ m.name
-                                                    }}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-
-                                        <mat-form-field appearance="fill">
-                                            <mat-label>Day</mat-label>
-                                            <mat-select>
-                                                <mat-option *ngFor="let d of days" [value]="d">{{ d }}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
+                                    <div class="col-12">
+                                        <label class="form-label">Aadhaar Number</label>
+                                        <input type="text" class="form-control">
                                     </div>
-                                </div>
-                            </div>
 
-                            <mat-form-field appearance="fill" class="full-field">
-                                <mat-label>Address</mat-label>
-                                <textarea matInput rows="3"></textarea>
-                            </mat-form-field>
-                        </div>
-                    </mat-expansion-panel>
+                                    <div class="col-12">
+                                        <label class="form-label">Name</label>
+                                        <input type="text" class="form-control">
+                                    </div>
 
-                    <!-- PAN Details Panel -->
-                    <mat-expansion-panel>
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>Pan Details</mat-panel-title>
-                        </mat-expansion-panel-header>
+                                    <div class="col-12">
+                                        <label class="form-label">Relation</label>
+                                        <select class="form-select">
+                                            <option value="FATHER">FATHER</option>
+                                            <option value="MOTHER">MOTHER</option>
+                                        </select>
+                                    </div>
 
-                        <div class="form-section">
-                            <mat-form-field appearance="fill" class="small-field">
-                                <mat-label>Pan Number</mat-label>
-                                <input matInput />
-                            </mat-form-field>
+                                    <div class="col-12">
+                                        <label class="form-label">Relation Name</label>
+                                        <input type="text" class="form-control" placeholder="Enter relation's name">
+                                    </div>
 
-                            <mat-form-field appearance="fill" class="small-field">
-                                <mat-label>Name on Pan</mat-label>
-                                <input matInput />
-                            </mat-form-field>
+                                    <div class="col-12">
+                                        <label class="form-label">Gender</label>
+                                        <select class="form-select">
+                                            <option value="MALE">MALE</option>
+                                            <option value="FEMALE">FEMALE</option>
+                                        </select>
+                                    </div>
 
-                            <mat-form-field appearance="fill" class="small-field">
-                                <mat-label>Father Name on Pan</mat-label>
-                                <input matInput />
-                            </mat-form-field>
+                                    <div class="col-12">
+                                        <label class="form-label">Date of Birth</label>
+                                        <div class="row g-2">
+                                            <div class="col-12 col-sm-4">
+                                                <select class="form-select">
+                                                    <option>Year</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 col-sm-4">
+                                                <select class="form-select">
+                                                    <option>Month</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 col-sm-4">
+                                                <select class="form-select">
+                                                    <option>Day</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                            <div class="dob">
-                                <mat-label>DOB</mat-label>
-                                <div class="dob-selects">
-                                    <mat-form-field appearance="fill">
-                                        <mat-label>Year</mat-label>
-                                        <mat-select>
-                                            <mat-option *ngFor="let y of years" [value]="y">{{ y }}</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-
-                                    <mat-form-field appearance="fill">
-                                        <mat-label>Month</mat-label>
-                                        <mat-select>
-                                            <mat-option *ngFor="let m of months" [value]="m.value">{{ m.name
-                                                }}</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-
-                                    <mat-form-field appearance="fill">
-                                        <mat-label>Day</mat-label>
-                                        <mat-select>
-                                            <mat-option *ngFor="let d of days" [value]="d">{{ d }}</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Address</label>
+                                        <textarea class="form-control" rows="3"></textarea>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </mat-expansion-panel>
-                </mat-accordion>
+                    </div>
+
+                    <!-- PAN Details -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panHeading">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#panCollapse" aria-expanded="false" aria-controls="panCollapse">
+                                PAN Details
+                            </button>
+                        </h2>
+                        <div id="panCollapse" class="accordion-collapse collapse" aria-labelledby="panHeading"
+                            data-bs-parent="#kycAccordion">
+                            <div class="accordion-body">
+                                <form class="row g-3">
+                                    <div class="col-12">
+                                        <label class="form-label">PAN Number</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label class="form-label">Name on PAN</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label class="form-label">Father Name on PAN</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label class="form-label">Date of Birth</label>
+                                        <div class="row g-2">
+                                            <div class="col-12 col-sm-4">
+                                                <select class="form-select">
+                                                    <option>Year</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 col-sm-4">
+                                                <select class="form-select">
+                                                    <option>Month</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 col-sm-4">
+                                                <select class="form-select">
+                                                    <option>Day</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="buttonFooter">
+
+                        <button class="btn btn-danger" (click)="rejectKYCDetails()">Reject
+                        </button>
+                        <button class="btn btn-warning" (click)="approveKYCDetails()">Hold
+                        </button>
+
+                        <button class="btn btn-success" (click)="approveKYCDetails()">Approve
+                        </button>
+                    </div>
+
+                </div>
+
+
+
+
+
+
 
 
 
@@ -196,7 +216,7 @@
 
         <div id="Norecord" width="100%"
             style="display: flex; justify-content: center; text-align: center; align-items: center;"
-            *ngIf="BranchCustomerList && BranchCustomerList.length > 0">
+            *ngIf="BranchCustomerList && BranchCustomerList.length === 0">
             <p *ngIf="BranchCustomerList && BranchCustomerList.length === 0">No records found.</p>
         </div>
 
