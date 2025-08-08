@@ -61,6 +61,21 @@
             float: left;
             justify-content: center;
             background-color: lightcoral;
+            overflow: hidden;
+
+
+            .carousel-inner {
+                width: 100%;
+            }
+
+            .carousel-item img {
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                /* Optional: keeps aspect ratio */
+                display: block;
+                margin: auto;
+            }
         }
 
         .contentArea {

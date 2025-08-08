@@ -1,8 +1,8 @@
 export interface Bank {
-    bank_code: string;
-    bank_name: string;
-    active: string;
-    gid: string;
+  bank_code: string;
+  bank_name: string;
+  active: string;
+  gid: string;
 }
 
 export interface User {
@@ -67,40 +67,80 @@ export interface Pan {
 }
 
 export interface Banks {
-    status: string;
-    message: string;
-    data: Bank[];
+  status: string;
+  message: string;
+  data: Bank[];
 }
 
 export interface Branch {
-    bank_code: string;
-    bank_name: string;
-    branch_name: string;
-    branch_code: string;
-    ifsc_code: string;
-    active: string;
-    gid: string;
+  bank_code: string;
+  bank_name: string;
+  branch_name: string;
+  branch_code: string;
+  ifsc_code: string;
+  active: string;
+  gid: string;
 }
 
 export interface Branchs {
-    status: string;
-    message: string;
-    data: Branch[];
+  status: string;
+  message: string;
+  data: Branch[];
 }
 
 
 export interface BranchCustomer {
-    gid: string;
-    bank_code: string;
-    branch_code: string;
-    account_number: string;
-    cif_number: string;
-    id_number: string;
-    name: string;
+  gid: string;
+  bank_code: string;
+  branch_code: string;
+  account_number: string;
+  cif_number: string;
+  id_number: string;
+  name: string;
 }
 
 export interface BranchCustomers {
-    status: string;
-    message: string;
-    data: BranchCustomer[];
+  status: string;
+  message: string;
+  data: BranchCustomer[];
+}
+
+
+export interface KYCResponse {
+  status: string;
+  message: string;
+  data: KYCData[];
+}
+
+export interface KYCData {
+  gid: string;
+  bank_code: string;
+  branch_code: string;
+  account_number: string;
+  cif_number: string;
+  customer_guid: string;
+  aadhar_page1_path: string;
+  aadhar_page1_url: string;
+  aadhar_page2_path: string;
+  aadhar_page2_url: string;
+  pan_page1_path: string;
+  pan_page1_url: string;
+  selie_path: string;
+  selie_url: string;
+  sign_path: string;
+  sign_url: string;
+  status: string;
+  created_on: string;
+  aadhar_json: string;
+  pan_json: string;
+  user_json: string;
+  status_remarks: string;
+  selfie_status: string;
+  selfie_status_remarks: string;
+  sign_status: string;
+  sign_status_remarks: string;
+  aadhaar_status: string;
+  aadhaar_status_remarks: string;
+  pan_status: string;
+  pan_status_remarks: string;
 }

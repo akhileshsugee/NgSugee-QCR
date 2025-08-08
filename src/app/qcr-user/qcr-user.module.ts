@@ -25,6 +25,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { UserManagementComponent } from './userMangement/userManagement.component';
 import { AddUserModalComponent } from './add-user-modal/add-user-modal.component';
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -51,8 +52,7 @@ import { AddUserModalComponent } from './add-user-modal/add-user-modal.component
     ReactiveFormsModule,
     MatFormFieldModule,
     MatAutocompleteModule,
-    MatExpansionModule
-
+    MatExpansionModule,
 
   ]
 })

@@ -20,10 +20,11 @@ export class HomeComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private router: Router,
-    private observer: BreakpointObserver ,
-    private authService : AuthService
+    private observer: BreakpointObserver,
+    private authService: AuthService
   ) { }
-  isAdmin = this.authService.isAdmin$
+  // isAdmin = this.authService.isAdmin$
+  isAdmin = false
   ngOnInit(): void {
     this.observer.observe(['(max-width: 920px)']).subscribe(result => {
       this.isSmallScreen = result.matches;
@@ -42,7 +43,7 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['kyc/dashboard']);
     } else if (route === 'pending') {
       this.router.navigate(['kyc/pending']);
-    } else if(route === 'userManagement') {
+    } else if (route === 'userManagement') {
       this.router.navigate(['kyc/userManagement'])
     }
   }

@@ -26,7 +26,7 @@
         </button>
     </div>
 
-    <div id="content" *ngIf="BranchCustomerList && BranchCustomerList.length > 0">
+    <div id="content" *ngIf="isQcrData">
         <form class="example-form w-full" width="100%">
             <mat-form-field appearance="outline" class="example-full-width w-full" style="width: 100%;">
                 <mat-label>Search by account number or CIF number...</mat-label>
@@ -41,25 +41,65 @@
         <div id="kycDeatils">
             <div class="kycDetailsHeader">
                 <span class="kycDetailsHeader-title"> &nbsp;&nbsp; KYC Details</span>
-                <form class="example-form">
+                <form [formGroup]="accountForm" class="example-form">
                     <mat-form-field class="example-full-width">
-                        <mat-label> Account Number : </mat-label>
-                        <input matInput placeholder="Account Number" value="193719">
+                        <mat-label>Account Number:</mat-label>
+                        <input matInput placeholder="Account Number" formControlName="account_number">
                     </mat-form-field>
 
                     &nbsp;&nbsp;
+
                     <mat-form-field class="example-full-width">
-                        <mat-label>CIF Number : </mat-label>
-                        <input matInput placeholder="CIF Number " value="1868173928389">
+                        <mat-label>CIF Number:</mat-label>
+                        <input matInput placeholder="CIF Number" formControlName="cif_number">
                     </mat-form-field>
-
-
                 </form>
+
 
             </div>
             <div class="kycDetailsContent">
                 <div class="imageArea">
-
+                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                                aria-label="Slide 3"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                                aria-label="Slide 4"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
+                                aria-label="Slide 5"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img [src]="ocrData.aadhar_page1_url" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img [src]="ocrData.aadhar_page2_url" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img [src]="ocrData.pan_page1_url" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img [src]="ocrData.selie_url" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img [src]="ocrData.sign_url" class="d-block w-100" alt="...">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
                 </div>
 
 
@@ -74,21 +114,23 @@
                         <div id="aadhaarCollapse" class="accordion-collapse collapse show"
                             aria-labelledby="aadhaarHeading" data-bs-parent="#kycAccordion">
                             <div class="accordion-body">
-                                <form class="row g-3">
+                                <form [formGroup]="aadhaarForm" class="row g-3">
 
                                     <div class="col-12">
                                         <label class="form-label">Aadhaar Number</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" formControlName="aadhaarNumber"
+                                            placeholder="Enter Aadhaar number">
                                     </div>
 
                                     <div class="col-12">
                                         <label class="form-label">Name</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" formControlName="name"
+                                            placeholder="Enter name">
                                     </div>
 
                                     <div class="col-12">
                                         <label class="form-label">Relation</label>
-                                        <select class="form-select">
+                                        <select class="form-select" formControlName="relation">
                                             <option value="FATHER">FATHER</option>
                                             <option value="MOTHER">MOTHER</option>
                                         </select>
@@ -96,12 +138,13 @@
 
                                     <div class="col-12">
                                         <label class="form-label">Relation Name</label>
-                                        <input type="text" class="form-control" placeholder="Enter relation's name">
+                                        <input type="text" class="form-control" formControlName="relationName"
+                                            placeholder="Enter relation's name">
                                     </div>
 
                                     <div class="col-12">
                                         <label class="form-label">Gender</label>
-                                        <select class="form-select">
+                                        <select class="form-select" formControlName="gender">
                                             <option value="MALE">MALE</option>
                                             <option value="FEMALE">FEMALE</option>
                                         </select>
@@ -111,18 +154,21 @@
                                         <label class="form-label">Date of Birth</label>
                                         <div class="row g-2">
                                             <div class="col-12 col-sm-4">
-                                                <select class="form-select">
+                                                <select class="form-select" formControlName="year">
                                                     <option>Year</option>
+                                                    <!-- Populate with years -->
                                                 </select>
                                             </div>
                                             <div class="col-12 col-sm-4">
-                                                <select class="form-select">
+                                                <select class="form-select" formControlName="month">
                                                     <option>Month</option>
+                                                    <!-- Populate with months -->
                                                 </select>
                                             </div>
                                             <div class="col-12 col-sm-4">
-                                                <select class="form-select">
+                                                <select class="form-select" formControlName="day">
                                                     <option>Day</option>
+                                                    <!-- Populate with days -->
                                                 </select>
                                             </div>
                                         </div>
@@ -130,9 +176,10 @@
 
                                     <div class="col-12">
                                         <label class="form-label">Address</label>
-                                        <textarea class="form-control" rows="3"></textarea>
+                                        <textarea class="form-control" rows="3" formControlName="address"></textarea>
                                     </div>
                                 </form>
+
                             </div>
                         </div>
                     </div>
@@ -148,43 +195,47 @@
                         <div id="panCollapse" class="accordion-collapse collapse" aria-labelledby="panHeading"
                             data-bs-parent="#kycAccordion">
                             <div class="accordion-body">
-                                <form class="row g-3">
+                                <form [formGroup]="panForm" class="row g-3">
                                     <div class="col-12">
                                         <label class="form-label">PAN Number</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" formControlName="panNumber">
                                     </div>
 
                                     <div class="col-12">
                                         <label class="form-label">Name on PAN</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" formControlName="name">
                                     </div>
 
                                     <div class="col-12">
                                         <label class="form-label">Father Name on PAN</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" formControlName="fatherName">
                                     </div>
 
                                     <div class="col-12">
                                         <label class="form-label">Date of Birth</label>
                                         <div class="row g-2">
                                             <div class="col-12 col-sm-4">
-                                                <select class="form-select">
+                                                <select class="form-select" formControlName="year">
                                                     <option>Year</option>
+                                                    <!-- Populate dynamically -->
                                                 </select>
                                             </div>
                                             <div class="col-12 col-sm-4">
-                                                <select class="form-select">
+                                                <select class="form-select" formControlName="month">
                                                     <option>Month</option>
+                                                    <!-- Populate dynamically -->
                                                 </select>
                                             </div>
                                             <div class="col-12 col-sm-4">
-                                                <select class="form-select">
+                                                <select class="form-select" formControlName="day">
                                                     <option>Day</option>
+                                                    <!-- Populate dynamically -->
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
+
                             </div>
                         </div>
                     </div>
@@ -215,11 +266,9 @@
         </div>
 
         <div id="Norecord" width="100%"
-            style="display: flex; justify-content: center; text-align: center; align-items: center;"
-            *ngIf="BranchCustomerList && BranchCustomerList.length === 0">
-            <p *ngIf="BranchCustomerList && BranchCustomerList.length === 0">No records found.</p>
+            style="display: flex; justify-content: center; text-align: center; align-items: center;" *ngIf="!isQcrData">
+            <p>No records found.</p>
         </div>
-
 
 
     </div>
