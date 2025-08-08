@@ -92,15 +92,43 @@
         }
 
         .gender-dob {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
 
-            mat-form-field {
-                width: 30%;
+            width: 100%;
+
+            .gender {
+                width: 50% !important;
             }
+
+            .dob {
+                width: calc(100% - 110px) !important;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                .dob-selects {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    padding: 10px;
+                    box-sizing: border-box;
+
+                    mat-form-field {
+                        width: 100px;
+                        height: 63px !important;
+                        margin-right: 5px;
+                        position: relative;
+                        top: -15px;
+
+                        &:last-child {
+                            margin-right: 0;
+                        }
+                    }
+                }
+            }
+
+
+
         }
 
         .gender {
