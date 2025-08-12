@@ -1,0 +1,31 @@
+<div class="overlay" *ngIf="imageStatuses.length > currentIndex">
+  <div class="popup-card">
+    <h2 class="title">Please select a reason</h2>
+
+    <div class="custom-select-wrapper">
+      <label class="custom-label">Select a reason</label>
+      <select [(ngModel)]="imageStatuses[currentIndex].reason">
+        <option value="">Select a reason</option>
+        <option
+          *ngFor="let remark of remarks; let i = index"
+          [value]="remark.remarks"
+        >
+          {{ remark.remarks }}
+        </option>
+      </select>
+    </div>
+
+    <div class="actions">
+      <button mat-button class="cancel-btn" (click)="setShowReasonPopup(false)">
+        Cancel
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="handleSave(imageStatuses[currentIndex].reason || '', true)"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,131 @@
+.container-fluid {
+  padding: 0;
+  height: 100vh;
+}
+
+.main {
+  width: calc(100% - 10px);
+  height: calc(100vh - 64px);
+  overflow-x: scroll;
+}
+
+/* Toolbar */
+mat-toolbar.dashboard_top_head {
+  display: flex;
+  justify-content: space-between;
+  background-color: #0e8961;
+  border-bottom: 1px solid #0e8961;
+  color: #fff;
+}
+
+/* Profile Card */
+.top_head_details_area {
+  display: flex;
+  align-items: center;
+}
+
+.user_details_with_login_icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.user_icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.user_icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user_info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user_name {
+  font-size: 16px;
+  font-family: "Sansita", serif;
+}
+
+.user_title {
+  font-size: 13px;
+  color: #d1d1d1;
+}
+
+/* Sidebar */
+mat-sidenav {
+  width: 250px;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.95);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar_top_logo_area {
+  height: 64px;
+  border-bottom: 1px solid #0e8961;
+  padding: 5px;
+}
+
+.sidebar_top_logo_area img {
+  height: 100%;
+  object-fit: contain;
+  margin-left: 5%;
+}
+
+.sidebar_menu_area {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar_menu_area::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar_menu_area .btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: #064631;
+  transition: background 0.3s, color 0.3s;
+}
+
+.sidebar_menu_area .btn:hover {
+  background-color: rgba(6, 70, 49, 0.1);
+}
+
+.sidebar_menu_area .btn.active {
+  background-color: #0e8961;
+  color: white;
+  font-weight: bold;
+  box-shadow: inset 4px 0 0 #064631;
+  /* left highlight bar */
+}
+
+.sidebar_menu_area .btn.active mat-icon {
+  color: white;
+}
+
+
+
+/* Mobile View */
+@media (max-width: 500px) {
+  .user_info {
+    display: none;
+  }
+}

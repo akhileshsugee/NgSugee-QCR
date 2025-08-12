@@ -1,0 +1,54 @@
+<mat-sidenav-container class="container-fluid">
+  <mat-sidenav #sidebar [mode]="sidenavMode" [opened]="isSidebarOpened">
+    <div class="sidebar_top_logo_area">
+      <img src="../../../assets/img/logo-text-primary.svg" alt="Logo">
+    </div>
+
+    <div class="sidebar_menu_area">
+      <button *ngIf="!isAdmin" class="btn" routerLink="/kyc/dashboard" routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>dashboard</mat-icon>
+        Dashboard
+      </button>
+      <button *ngIf="isAdmin" class="btn" routerLink="/kyc/userManagement" routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>dashboard</mat-icon>
+        User Management
+      </button>
+
+      <button class="btn" routerLink="/kyc/pending" routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon>pending</mat-icon>
+        Pending
+      </button>
+
+      <button class="btn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar class="dashboard_top_head">
+      <button mat-icon-button (click)="sidebar.toggle()" *ngIf="isSmallScreen">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <div class="top_head_details_area" (click)="openProfileDialog()">
+        <div class="user_details_with_login_icon">
+          <div class="user_icon">
+            <img src="../../../assets/img/user.png" alt="Profile">
+          </div>
+          <div class="user_info">
+            <div class="user_name">{{ userName }}</div>
+          </div>
+        </div>
+      </div>
+    </mat-toolbar>
+
+    <div class="main">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

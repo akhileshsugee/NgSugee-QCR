@@ -1,0 +1,297 @@
+<div id="wrapper">
+    <div id="header">
+        <mat-form-field>
+            <mat-label>Bank</mat-label>
+            <mat-select (selectionChange)="getBranches()" [(ngModel)]="selectedBank" name="bank">
+                <mat-option *ngFor="let bank of BankList" [value]="bank.bank_code">
+                    {{ bank.bank_name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        &nbsp;&nbsp;
+
+        <mat-form-field>
+            <mat-label>Branch</mat-label>
+            <mat-select (selectionChange)="onBranchesChnage()" [(ngModel)]="selectedBranch" name="branch">
+                <mat-option *ngFor="let branch of BranchList" [value]="branch.branch_code">
+                    {{ branch.branch_name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        &nbsp;&nbsp;
+
+        <button mat-raised-button color="primary" (click)="getEntries()" [disabled]="!selectedBank || !selectedBranch"
+            id="getEntriesButton">
+            Get Entries
+        </button>
+
+    </div>
+
+    <div id="content" *ngIf="isQcrData">
+        <form class="example-form w-full" width="100%">
+            <mat-form-field appearance="outline" class="example-full-width w-full" style="width: 100%;">
+                <mat-label>Search by account number or CIF number...</mat-label>
+                <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption>
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option.account_number">
+                        {{ option.name }} &nbsp;( {{ option.account_number }} )</mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </form>
+
+        <div id="kycDeatils">
+            <div class="kycDetailsHeader">
+                <span class="kycDetailsHeader-title"> &nbsp;&nbsp; KYC Details</span>
+                <form [formGroup]="accountForm" class="example-form">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Account Number:</mat-label>
+                        <input matInput placeholder="Account Number" formControlName="account_number">
+                    </mat-form-field>
+
+                    &nbsp;&nbsp;
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>CIF Number:</mat-label>
+                        <input matInput placeholder="CIF Number" formControlName="cif_number">
+                    </mat-form-field>
+                </form>
+
+
+            </div>
+            <div class="kycDetailsContent">
+                <div class="imageArea">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel"
+                        data-bs-ride="false" data-bs-interval="false">
+                        <div class="carousel-indicators">
+                            <button *ngFor="let img of images; let i = index" type="button"
+                                data-bs-target="#carouselExampleIndicators" [attr.data-bs-slide-to]="i"
+                                [class.active]="i === 0" [attr.aria-current]="i === 0 ? 'true' : null"
+                                [attr.aria-label]="'Slide ' + (i + 1)">
+                            </button>
+                        </div>
+
+                        <div class="carousel-inner">
+                            <div *ngFor="let img of images; let i = index" class="carousel-item"
+                                [class.active]="i === 0">
+
+                                <img [src]="img.url" class="d-block w-100" [alt]="img.key"
+                                    (click)="openImage(img.url, img.key)">
+
+                                <div class="check-boxes">
+                                    <mat-checkbox [checked]="getStatus(img.key) === 'ok'"
+                                        (change)="onCheckboxChange(img.key, 'ok', $event.checked)">
+                                        OK
+                                    </mat-checkbox>
+
+                                    <mat-checkbox [checked]="getStatus(img.key) === 'not_ok'"
+                                        (change)="onCheckboxChange(img.key, 'not_ok', $event.checked)">
+                                        Not Ok
+                                    </mat-checkbox>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="accordion contentArea" id="kycAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="aadhaarHeading">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#aadhaarCollapse" aria-expanded="true" aria-controls="aadhaarCollapse">
+                                Aadhaar Details
+                            </button>
+                        </h2>
+                        <div id="aadhaarCollapse" class="accordion-collapse collapse show"
+                            aria-labelledby="aadhaarHeading" data-bs-parent="#kycAccordion">
+                            <div class="accordion-body">
+                                <form [formGroup]="aadhaarForm" class="row g-3">
+
+                                    <div class="col-12">
+                                        <label class="form-label">Aadhaar Number</label>
+                                        <input type="text" class="form-control" formControlName="aadhar_number"
+                                            placeholder="Enter Aadhaar number">
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label class="form-label">Name</label>
+                                        <input type="text" class="form-control" formControlName="name"
+                                            placeholder="Enter name">
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label class="form-label">Relation</label>
+                                        <select class="form-select" formControlName="relation">
+                                            <option value="" disabled selected>Select relation...</option>
+                                            <option *ngFor="let item of RelationsList" [value]="item.value">
+                                                {{ item.value }}
+                                            </option>
+                                        </select>
+                                    </div>
+
+
+                                    <div class="col-12">
+                                        <label class="form-label">Relation Name</label>
+                                        <input type="text" class="form-control" formControlName="relation_name"
+                                            placeholder="Enter relation's name">
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label class="form-label">Gender</label>
+                                        <select class="form-select" formControlName="gender">
+                                            <option value="MALE">MALE</option>
+                                            <option value="FEMALE">FEMALE</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label class="form-label">DOB</label>
+                                        <div class="row g-2">
+                                            <div class="col-4">
+                                                <select class="form-select" formControlName="dob_year"
+                                                    (change)="onDobChangeAddhar()">
+                                                    <option value="">Year</option>
+                                                    <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-4">
+                                                <select class="form-select" formControlName="dob_month"
+                                                    (change)="onDobChangeAddhar()">
+                                                    <option value="">Month</option>
+                                                    <option *ngFor="let m of months" [value]="m.value">{{ m.label }}
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-4">
+                                                <select class="form-select" formControlName="dob_day"
+                                                    (change)="onDobChangeAddhar()">
+                                                    <option value="">Day</option>
+                                                    <option *ngFor="let d of days" [value]="d">{{ d }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12">
+                                        <label class="form-label">Address</label>
+                                        <textarea class="form-control" rows="3" formControlName="address"></textarea>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PAN Details -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panHeading">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#panCollapse" aria-expanded="false" aria-controls="panCollapse">
+                                PAN Details
+                            </button>
+                        </h2>
+                        <div id="panCollapse" class="accordion-collapse collapse" aria-labelledby="panHeading"
+                            data-bs-parent="#kycAccordion">
+                            <div class="accordion-body">
+                                <form [formGroup]="panForm" class="row g-3">
+                                    <div class="col-12">
+                                        <label class="form-label" for="form_60">Form 60</label>
+                                        <input id="form_60" type="checkbox"
+                                            [checked]="panForm.get('form_60')?.value === 1"
+                                            (change)="onForm60Change($event)" />
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label class="form-label">PAN Number</label>
+                                        <input type="text" class="form-control" formControlName="pan_number">
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label class="form-label">Name on PAN</label>
+                                        <input type="text" class="form-control" formControlName="name">
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label class="form-label">Father Name on PAN</label>
+                                        <input type="text" class="form-control" formControlName="father_name">
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label class="form-label">DOB</label>
+                                        <div class="row g-2">
+                                            <div class="col-4">
+                                                <select class="form-select" formControlName="dob_year"
+                                                    (change)="onDobChange()">
+                                                    <option value="">Year</option>
+                                                    <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-4">
+                                                <select class="form-select" formControlName="dob_month"
+                                                    (change)="onDobChange()">
+                                                    <option value="">Month</option>
+                                                    <option *ngFor="let m of months" [value]="m.value">{{ m.label }}
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-4">
+                                                <select class="form-select" formControlName="dob_day"
+                                                    (change)="onDobChange()">
+                                                    <option value="">Day</option>
+                                                    <option *ngFor="let d of days" [value]="d">{{ d }}</option>
+                                                </select>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="buttonFooter">
+
+                        <button class="btn btn-danger" (click)="rejectKYCDetails()">Reject
+                        </button>
+                        <button class="btn btn-warning" (click)="approveKYCDetails()">Hold
+                        </button>
+
+                        <button class="btn btn-success" (click)="approveKYCDetails()">Approve
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div id="Norecord" width="100%"
+            style="display: flex; justify-content: center; text-align: center; align-items: center;" *ngIf="!isQcrData">
+            <p>No records found.</p>
+        </div>
+
+
+    </div>

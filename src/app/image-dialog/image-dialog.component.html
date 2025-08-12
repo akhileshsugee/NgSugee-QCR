@@ -1,0 +1,33 @@
+<div class="dialog-container" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <div class="dialog-header" cdkDragHandle>
+    <span class="title">{{ data.imageName }}</span>
+    <div class="controls">
+      <button class="zoom-btn" mat-icon-button (click)="zoomIn()" title="Zoom In">
+        <mat-icon>zoom_in</mat-icon>
+      </button>
+      <button class="zoom-btn" mat-icon-button (click)="zoomOut()" title="Zoom Out">
+        <mat-icon>zoom_out</mat-icon>
+      </button>
+      <button class="close-btn" mat-icon-button color="warn" (click)="dialogRef.close()" title="Close">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="image-wrapper"
+       (mousemove)="moveLens($event)" 
+       (mouseleave)="hideLens()"
+       (mouseenter)="showLens()">
+
+    <img #imageRef [src]="data.imageUrl"
+         [style.transform]="'scale(' + zoomLevel + ')'" />
+
+    <div class="lens" *ngIf="lensVisible"
+         [style.top.px]="lensY"
+         [style.left.px]="lensX"
+         [style.background-image]="'url(' + data.imageUrl + ')'"
+         [style.background-size]="bgWidth + 'px ' + bgHeight + 'px'"
+         [style.background-position]="bgPosX + 'px ' + bgPosY + 'px'">
+    </div>
+  </div>
+</div>

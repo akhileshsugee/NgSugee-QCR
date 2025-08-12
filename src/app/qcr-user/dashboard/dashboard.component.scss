@@ -1,0 +1,218 @@
+#wrapper {
+    width: calc(100% - 20px);
+    height: calc(100vh - 64px);
+    padding: 10px;
+}
+
+#header {
+    width: calc(100%);
+    height: auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    #getEntriesButton {
+        background-color: #0e8961;
+        color: white !important;
+        border: none;
+        width: 212px;
+        height: 55px;
+    }
+}
+
+
+#content {
+    width: 100%;
+    margin-top: 20px;
+    height: auto;
+
+    #kycDeatils {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .kycDetailsHeader {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            ;
+
+            .kycDetailsHeader-title {
+                font-size: 20px;
+                font-weight: bold;
+                color: #000;
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+    .kycDetailsContent {
+        width: 100%;
+        height: 100%;
+
+        .imageArea {
+            width: 350px;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            float: left;
+
+            .carousel-inner {
+                width: 100%;
+                height: 100%;
+                position: relative;
+            }
+
+            .carousel-item {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                border-radius: 6px;
+                overflow: hidden;
+                background: #f8f9fa; // fallback background
+                border: 1px solid #ddd;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    display: block;
+                    background-color: #fff;
+                }
+
+                .check-boxes {
+                    position: absolute;
+                    bottom: 15px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    display: flex;
+                    gap: 15px;
+                    background: rgba(255, 255, 255, 0.8);
+                    padding: 5px 10px;
+                    border-radius: 6px;
+                    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+                }
+            }
+        }
+
+
+
+        .contentArea {
+            width: calc(100% - 350px);
+            float: right;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            // padding: 16px;
+        }
+
+        .form-section {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+    }
+
+    #buttonFooter {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+
+        button {
+            margin: 0 10px;
+            float: right;
+        }
+
+
+    }
+}
+
+@media (max-width: 920px) {
+    .kycDetailsHeader {
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        .example-form {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: center !important;
+        }
+    }
+
+    .example-full-width {
+        width: 212px;
+    }
+
+
+    .kycDetailsContent {
+        width: 100vw !important;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .imageArea {
+            width: 350px;
+            height: 250px;
+        }
+
+        .contentArea {
+            width: 100vw;
+            clear: both;
+            display: flex;
+            justify-content: center;
+
+        }
+
+        #kycAccordion {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #panCollapse {
+            width: calc(100vw - 40px);
+            padding: 20px;
+        }
+
+        #aadhaarCollapse {
+            width: calc(100vw - 40px);
+            padding: 20px;
+        }
+
+        #aadhaarHeading {
+            width: 100vw
+        }
+
+        #panHeading {
+            width: 100vw
+        }
+
+
+    }
+
+    #buttonFooter {
+        width: 100vw !important;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+
+}

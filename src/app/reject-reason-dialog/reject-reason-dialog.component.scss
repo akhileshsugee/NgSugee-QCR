@@ -1,0 +1,59 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.custom-select-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.custom-label {
+    margin-bottom: 4px;
+    font-weight: 500;
+    color: #555;
+}
+
+.mat-select {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 4px;
+    background-color: white;
+}
+
+
+.popup-card {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    max-width: 380px;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+
+    .title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .w-100 {
+        width: 100%;
+    }
+
+    .actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.5rem;
+        margin-top: 1rem;
+
+        .cancel-btn {
+            background-color: #e0e0e0;
+        }
+    }
+}
