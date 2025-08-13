@@ -1,0 +1,32 @@
+.report-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+
+  h2 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+
+    mat-form-field {
+      flex: 1;
+      min-width: 200px;
+    }
+  }
+
+  .form-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+
+    button {
+      min-width: 180px;
+    }
+  }
+}

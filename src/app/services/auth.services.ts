@@ -60,19 +60,28 @@ export class AuthService {
                     this.loggedIn$.next(true);
                     this.isAdmin$.next(data.role === '1');
 
-                    this.router.navigate(['kyc/dashboard']);
+                    if (data.role === '1') {
+                        this.router.navigate(['/admin']);
+                    }
+                    else if (data.role === '2') {
+                        this.router.navigate(['kyc/dashboard']);
+                    }
+                    else {
+                        alert(data.message || 'Unable to login');
+                    }
                 } else {
-                    alert(data.message || 'Unable to login');
+                    alert(data.message || 'Invalid credentials');
                 }
             },
             error: () => {
-                alert('Something went wrong')
+                alert('Something went wrong');
             },
             complete: () => {
                 this.loading$.next(false);
             }
         });
     }
+
 
     logout() {
         localStorage.clear();

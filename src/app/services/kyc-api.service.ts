@@ -36,8 +36,12 @@ export class KycApiService {
   updateOCRData(data: any): Observable<any> {
     return this.http.post<any>(this.BaseUrl + 'updateOCRData', data);
   }
-  getRemarks(data : any) : Observable<any> {
-    return this.http.post<Remark[]>(this.BaseUrl + 'getQCRemarks' , data)
+  getRemarks(data: any): Observable<any> {
+    return this.http.post<Remark[]>(this.BaseUrl + 'getQCRemarks', data)
   }
 
+  getReportExcel(bankCode: string, fromDate: string, toDate: string): Observable<Blob> {
+    const url = `${this.BaseUrl}getXLSData?bank_code=${bankCode}&fromdate=${fromDate}&todate=${toDate}`;
+    return this.http.get(url, { responseType: 'blob' });
+  }
 }

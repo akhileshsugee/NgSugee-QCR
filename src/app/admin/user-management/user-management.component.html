@@ -1,0 +1,32 @@
+<div *ngIf="loading">
+    <!-- Replace with your loader -->
+    <p>Loading...</p>
+</div>
+
+<div *ngIf="!loading" class="p-4">
+    <div class="flex items-center justify-between mb-4">
+        <!-- <app-search-bar-dropdown [items]="members" (search)="onSearch($event)"></app-search-bar-dropdown> -->
+
+        <button (click)="openModal()"
+            class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center">
+            <i class="fa fa-plus"></i>
+        </button>
+    </div>
+
+
+    <div *ngIf="members.length === 0" class="text-center text-gray-500 mt-10">
+        <p class="text-lg">No members added yet</p>
+    </div>
+
+    <div *ngFor="let user of members" class="flex justify-between items-center border p-4 rounded mb-2">
+        <div>
+            <p class="font-semibold">{{ user.name }}</p>
+            <p class="text-sm text-gray-500">{{ user.mobile }}</p>
+        </div>
+
+        <label class="switch">
+            <input type="checkbox" [checked]="user.active === '1'" (change)="handleToggle(user)" />
+            <span class="slider"></span>
+        </label>
+    </div>
+</div>

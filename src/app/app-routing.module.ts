@@ -7,6 +7,7 @@ import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 const routes: Routes = [
   { path: 'login', component: AuthPageComponent },
   { path: 'kyc', loadChildren: () => import('./qcr-user/qcr-user.module').then(q => q.QcrUserModule) },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
   // {path : 'dashboard' , component : DashboardComponent},
 
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -17,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
