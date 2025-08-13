@@ -39,7 +39,7 @@
             </mat-form-field>
         </form>
 
-        <div id="kycDeatils">
+        <div id="kycDeatils" *ngIf="isQcrData">
             <div class="kycDetailsHeader">
                 <span class="kycDetailsHeader-title"> &nbsp;&nbsp; KYC Details</span>
                 <form [formGroup]="accountForm" class="example-form">

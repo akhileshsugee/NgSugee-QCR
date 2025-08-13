@@ -63,7 +63,7 @@ export class DashboardComponent implements OnInit {
   panForm: FormGroup
   accountForm!: FormGroup;
 
-  isQcrData: boolean = true
+  isQcrData: boolean = false
   isChecked(key: string, status: 'ok' | 'not_ok') {
     return this.imagesStatus.find(s => s.key === key)?.status === status;
   }
