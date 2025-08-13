@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Banks, BranchCustomers, Branchs, KYCEntries, KYCResponse, relations, Remark } from '../interfaces/kycdata.interface';
+import { Banks, BranchCustomers, Branchs, ExportResponse, KYCEntries, KYCResponse, relations, Remark } from '../interfaces/kycdata.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -38,6 +38,10 @@ export class KycApiService {
   }
   getRemarks(data: any): Observable<any> {
     return this.http.post<Remark[]>(this.BaseUrl + 'getQCRemarks', data)
+  }
+
+  getReportExportImages(data: any): Observable<ExportResponse> {
+    return this.http.post<ExportResponse>(this.BaseUrl + 'exportImages', data)
   }
 
   getReportExcel(bankCode: string, fromDate: string, toDate: string): Observable<Blob> {

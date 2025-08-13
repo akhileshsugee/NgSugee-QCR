@@ -1,44 +1,126 @@
 <div class="report-container">
     <h2>Report Generation</h2>
 
-    <form [formGroup]="reportForm" (ngSubmit)="generateReport()">
-        <div class="form-row">
-            <mat-form-field appearance="outline">
-                <mat-label>Select Bank</mat-label>
-                <mat-select formControlName="bank_code" required>
-                    <mat-option *ngFor="let bank of banks_list" [value]="bank.bank_code">
-                        {{ bank.bank_name }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+    <mat-button-toggle-group [(ngModel)]="selectedSegment" appearance="standard" name="segmentGroup">
+        <mat-button-toggle value="excel">Download Excel</mat-button-toggle>
+        <mat-button-toggle value="image">Export as Image</mat-button-toggle>
+    </mat-button-toggle-group>
 
-            <mat-form-field appearance="outline">
-                <mat-label>From Date</mat-label>
-                <input matInput [matDatepicker]="fromPicker" formControlName="fromdate" required>
-                <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
-                <mat-datepicker #fromPicker></mat-datepicker>
-            </mat-form-field>
+    <div *ngIf="selectedSegment == 'excel'">
+        <br>
+        <form [formGroup]="reportForm">
+            <div class="form-row">
+                <!-- Bank Select -->
+                <mat-form-field appearance="outline">
+                    <mat-label>Select Bank</mat-label>
+                    <mat-select formControlName="bank_code" required>
+                        <mat-option *ngFor="let bank of banks_list" [value]="bank.bank_code">
+                            {{ bank.bank_name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
 
-            <mat-form-field appearance="outline">
-                <mat-label>To Date</mat-label>
-                <input matInput [matDatepicker]="toPicker" formControlName="todate" required>
-                <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
-                <mat-datepicker #toPicker></mat-datepicker>
-            </mat-form-field>
+                <!-- From Date -->
+                <mat-form-field appearance="outline">
+                    <mat-label>From Date</mat-label>
+                    <input matInput [matDatepicker]="fromPicker" formControlName="fromdate" required>
+                    <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #fromPicker></mat-datepicker>
+                </mat-form-field>
+
+                <!-- To Date -->
+                <mat-form-field appearance="outline">
+                    <mat-label>To Date</mat-label>
+                    <input matInput [matDatepicker]="toPicker" formControlName="todate" required>
+                    <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #toPicker></mat-datepicker>
+                </mat-form-field>
+
+            </div>
+            <div class="form-actions">
+                <button mat-raised-button color="primary" (click)="onExcelDownload()">
+                    <mat-icon>file_download</mat-icon>
+                    Download Excel
+                </button>
+
+            </div>
+        </form>
+    </div>
+
+    <div *ngIf="selectedSegment == 'image'">
+        <br>
+        <form [formGroup]="reportForm">
+            <div class="form-row">
+                <!-- Bank Select -->
+                <mat-form-field appearance="outline">
+                    <mat-label>Select Bank</mat-label>
+                    <mat-select formControlName="bank_code" required>
+                        <mat-option *ngFor="let bank of banks_list" [value]="bank.bank_code">
+                            {{ bank.bank_name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <!-- From Date -->
+                <mat-form-field appearance="outline">
+                    <mat-label>From Date</mat-label>
+                    <input matInput [matDatepicker]="fromPicker" formControlName="fromdate" required>
+                    <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #fromPicker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>To Date</mat-label>
+                    <input matInput [matDatepicker]="toPicker" formControlName="todate" required>
+                    <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #toPicker></mat-datepicker>
+                </mat-form-field>
+                <br>
+
+                <p>OR</p>
+                <div class="user-gids-images-container">
+                    <mat-form-field appearance="outline">
+                        <mat-label>User GIDS(101,102...)</mat-label>
+                        <textarea matInput formControlName="gids" placeholder="User GIDS(101,102...)"
+                            required></textarea>
+                    </mat-form-field>
+
+                    <!-- Image URL -->
+                    <mat-form-field appearance="outline" style="width: 100%;" *ngIf="isUrl">
+                        <mat-label>Image URL</mat-label>
+                        <textarea matInput formControlName="imgUrl" placeholder="Enter image URL"></textarea>
+                    </mat-form-field>
+                </div>
+
+                <!-- Copy & Download buttons -->
+                <div style="margin-top: 10px; display: flex; gap: 10px;" *ngIf="isUrl">
+                    <button mat-raised-button color="primary" type="button" (click)="copyToClipboard()">
+                        <mat-icon>content_copy</mat-icon> Copy
+                    </button>
+
+                    <button mat-raised-button color="accent" type="button" (click)="downloadTxtFile()">
+                        <mat-icon>download</mat-icon> Download
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button mat-raised-button color="accent" type="button" (click)="ExportImg()">
+                    <mat-icon>image</mat-icon>
+                    Export as Image
+                </button>
+            </div>
+        </form>
 
 
-        </div>
 
-        <div class="form-actions">
-            <button mat-raised-button color="primary" type="submit">
-                <mat-icon>file_download</mat-icon>
-                Download Excel
-            </button>
 
-            <button mat-raised-button color="accent" type="button" (click)="exportAsImage()">
-                <mat-icon>image</mat-icon>
-                Export as Image
-            </button>
-        </div>
-    </form>
+    </div>
+
+
+</div>
+
+
+<div id="loader" *ngIf="isLoading">
+    Loading, please wait...
 </div>

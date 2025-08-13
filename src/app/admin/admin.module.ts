@@ -24,6 +24,8 @@ import { PendingUserComponent } from './pending-user/pending-user.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
 @NgModule({
   declarations: [
     AdminHomeComponent,
@@ -53,7 +55,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatCheckboxModule,
     MatIconModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatButtonToggleModule
   ]
 })
 export class AdminModule { }

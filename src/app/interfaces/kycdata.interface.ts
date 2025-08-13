@@ -175,3 +175,10 @@ export interface relations {
   message: string,
   data: relation[]
 }
+
+export interface ExportResponse {
+  status: string;
+  message: string;
+  data: number;
+  Url: string[];
+}
