@@ -403,8 +403,20 @@ export class DashboardComponent implements OnInit {
     console.log(this.aadhaarForm.value);
     console.log(this.panForm.value);
 
+    const userJson = {
+      account_number: this.accountForm.get('account_number')?.value,
+      cif_number: this.accountForm.get('cif_number')?.value,
+      name: this.aadhaarForm.get('name')?.value,
+      father_name: this.panForm.get('father_name')?.value,
+      aadhar_no: this.aadhaarForm.get('aadhar_number')?.value,
+      pan_no: this.panForm.get('pan_number')?.value,
+      dob: this.panForm.get('dob')?.value,
+      gender: this.aadhaarForm.get('gender')?.value,
+      address: this.aadhaarForm.get('address')?.value
+    }
+    console.log(userJson);
     const formData = new FormData()
-    formData.append('user_json', JSON.stringify(this.ocrData.user_json))
+    formData.append('user_json', JSON.stringify(userJson))
     formData.append("customer_guid", this.ocrData.customer_guid)
     formData.append("gid", this.ocrData.gid)
     formData.append("bank_code", this.selectedBank)
